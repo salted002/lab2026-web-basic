@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>자기소개</title>
+  </head>
+  <body>
+    <div id="intro"></div>
+    <script>
+      const name = '정시원';
+      let age;
+      const currentCity = '부천시';
+      const hobby = "영화 보기";
+
+      // 나이 계산하기
+      let today = new Date();
+      let birthday = new Date(1995, 11-1, 14);
+      let diffInMs = today - birthday;
+      let diffInYear = Math.floor(diffInMs / 31557600000);
+      age = diffInYear;
+
+      let intro = `안녕하세요? 제 이름은 ${name}입니다.
+      저는 올해 만으로 ${age}살입니다.
+      현재 ${currentCity}에 살고 있고, 취미는 ${hobby}입니다.`;
+
+      // div에 넣기
+      document.getElementById('intro').textContent = intro;
+
+
+    </script>
+  </body>
+</html>

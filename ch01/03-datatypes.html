@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <title>자료형 연습</title>
+  </head>
+  <body>
+    <p>자료형 연습 페이지</p>
+    <script>
+      const num = 10;
+      const text = "정시원";
+      const isStudent = true; 
+      
+      console.log(typeof num); // number
+      console.log(typeof text); // string
+      console.log(typeof isStudent); // boolean
+
+      console.log(text);
+      console.log(num);
+      console.log(isStudent);
+
+      let price = 9000;
+      console.log("price", price, typeof price);
+
+      let productName = 'happy hacking!';
+      console.log("productName", productName, typeof productName);
+      
+      let isStock = true;
+      console.log("isStock", isStock, typeof isStock);
+
+      console.log("숫자 덧셈 5 + 10 =", 5+10);
+      console.log(`숫자와 문자 덧셈 5 + "10" =>`, 5 + "10");
+      console.log('숫자와 문자를 +를 사용해 더하면, 숫자를 자동으로 문자형으로 변환하여 둘을 이어붙인다.');
+
+      console.log(productName + '은', price + '원이다.');
+
+      // 연습해보자.
+      const FAVORITE_NUMBER = 20260623;
+      let favoriteWord = "matador";
+      let isTired = false;
+
+      console.log('1. 좋아하는 ' + typeof(FAVORITE_NUMBER) + ': ' + FAVORITE_NUMBER);
+      console.log('2. 좋아하는 ' + typeof(favoriteWord) + ': ' + favoriteWord);
+      console.log('3. 지쳤는가? ' + typeof(isTired) + ': ' + isTired);
+
+    </script>
+  </body>
+</html>

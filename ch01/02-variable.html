@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <title>변수 연습</title>
+  </head>
+  <body>
+    <p>변수 연습 페이지입니다.</p>
+    <script>
+      let age = 30;
+      console.log("age:", age); // 여기서 HEY 호출하면 오류뜸.
+      const HEY = 15;
+      console.log(HEY)
+      age = 42;
+      console.log(age)
+      // HEY = 12; // Assignment to constant 에러.
+
+      // 변수 선언 -> 할당 -> 출력
+      // 선언과 할당 동시에 : let score = 100;
+      let score;
+      score = 100;
+      console.log(score);
+      
+      // 변수에 값 재할당(변경) -> 출력
+      score = 90;
+      console.log(score);
+
+      // 상수에 값 재할당하고 에러 확인하기
+      const hobby = "유튜브 보기";
+      console.log(hobby)
+      hobby = "낚시"
+    </script>
+  </body>
+</html>

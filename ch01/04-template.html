@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <title>템플릿 문자열</title>
+  </head>
+  <body>
+    <p>템플릿 문자열 페이지</p>
+    <div id="output">
+
+    </div>
+    <script>
+      // 템플릿 문자열(템플릿 리터럴)
+      // 값을 넣고 싶은 자리에는 ${ }를 적고, 안에 변수 이름 또는 계산식을 넣을 수 있다. (계산식을 넣을 경우 결과값을 출력함.)
+
+      const name = '시원';
+      // const age = 30;
+
+      // console.log('제 이름은 ' + name + '입니다.', '나이는 ' + age + '살입니다.');
+      // console.log(`${name}(이)가 내년이면 글쎄 ${age + 1}살이 된답니다.`);
+
+      // 예제: 오늘 먹은 지단치즈김밥은 가격이 5300원입니다.
+      // 메뉴명과 가격을 변수로 저장하고 템플릿팅으로 출력해보세요.
+      let menu = '지단치즈김밥';
+      let price = 5300;
+      let sentence = `오늘 점심 메뉴인 ${menu}은(는) ${price}원입니다.`;
+      console.log(sentence);
+
+      let fullName = '정시원';
+      let today = new Date();
+      console.log(today);
+      let birthday = new Date(1995, 10, 14);
+      console.log(birthday);
+
+      let diffInMs = today - birthday;
+      console.log(diffInMs);
+      let diffInTime = new Date(diffInMs).getTime();
+      let age = Math.floor(diffInTime / 31557600000);
+      console.log(age);
+      let region = '부천시';
+
+      let introduction = `안녕하세요, 저는 ${fullName}입니다.
+저는 올해 만으로 ${age}살입니다.
+현재 ${region}에 살고 있습니다.`;
+      console.log(introduction);
+
+      // div output 텍스트를 작성
+      const div = document.getElementById("output");
+      console.log(div); // 이건 밑에서 textContent를 설정해줬는데도 textContent가 찍히네. 왜지.
+      // 그리고 왜 콘솔에서는 백틱 안의 줄바꿈이 반영이 되는데 웹페이지에서는 반영이 안되는거지.
+      div.textContent = introduction;
+
+    </script>
+  </body>
+</html>
