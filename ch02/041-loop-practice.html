@@ -1,0 +1,99 @@
+<html>
+  <head>
+    <title>반복문 연습문제(클로드가 만들어줌)</title>
+  </head>
+  <body>
+    <div id="output"></div>
+    <script>
+      // 1. for문을 사용해 주어진 배열에서 짝수만 뽑아서 새로운 배열로 만드시오.
+      // const numbers = [12, 7, 23, 14, 8, 31, 42, 5];
+      const numbers = [12, 7, 23, 14, 8, 31, 42, 5];
+      let evenNumbers = [];
+
+      for (let i = 0, j = 0; i < numbers.length; i++) {
+        let number = numbers[i];
+        if (number % 2 === 0) {
+          evenNumbers[j] = number;
+          j++;
+        }
+      }
+      console.log(evenNumbers);
+
+      // 2. for..or문과 객체를 사용해 각 점수 배열에 학점을 매기시오.
+      /* const scores = [95, 78, 82, 67, 88, 91];
+        90점 이상: A
+        80점 이상 90점 미만: B
+        70점 이상 80점 미만: C
+        70점 미만: F
+      */
+      const scores = [95, 78, 82, 67, 88, 91];
+
+      for (const score of scores) {
+
+        let scoreboard = {};
+        scoreboard['점수'] = score;
+
+        if (score >= 90) {
+          scoreboard['학점'] = 'A';
+        } else if (score >= 80) {
+          scoreboard['학점'] = 'B';
+        } else if (score >= 70) {
+          scoreboard['학점'] = 'C';
+        } else {
+          scoreboard['학점'] = 'F';
+        }
+
+        console.log(`점수: ${scoreboard.점수}, 학점: ${scoreboard.학점}`);
+      }
+
+      // 3. while문을 사용해 주어진 배열의 합계와 평균을 구하시오.
+      // const prices = [15000, 23000, 8500, 42000, 19000];
+      const prices = [15000, 23000, 8500, 42000, 19000];
+
+      let sum = 0;
+      let mean;
+      let i = 0;
+      while (i < prices.length) {
+        sum += prices[i];
+        i++;
+      }
+      mean = sum / prices.length;
+      console.log("합계:", sum, "평균:", mean);
+
+      // 4. for문을 사용해 구구단 2단을 출력하시오.
+      for (let i = 1; i < 10; i++) {
+        let output = 2*i;
+        console.log(`2 × ${i} = ${output}`);
+      }
+
+      // 4-1. for문을 사용해 구구단을 출력하시오.
+      for (let i = 2; i < 10; i++){
+        for (let j = 1; j < 10; j++){
+          let output = i * j;
+          console.log(`${i} × ${j} = ${output}`);
+        }
+      }
+
+      // 5. 문자열 배열을 뒤에서 앞으로 순회하면서 길이가 5자 이상인 단어를 찾아서 출력하시오.
+      const words = ["apple", "banana", "cat", "elephant", "dog", "strawberry"];
+
+      // for문으로
+      for (let i = words.length - 1; i >= 0; i--) {
+        let word = words[i];
+        if (word.length >= 5) {
+          console.log(word);
+        }
+      }
+
+      // while문으로 
+      let k = words.length - 1;
+      while (k >= 0) {
+        let word = words[k];
+        if(word.length >= 5) {
+          console.log(word);
+        }
+        k--;
+      }
+    </script>
+  </body>
+</html>

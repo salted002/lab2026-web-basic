@@ -1,5 +1,6 @@
 <html>
   <body>
+    <div id="output"></div>
     <script>
       /*
         if문
@@ -11,6 +12,28 @@
       } else {
         console.log("슬프게도 10 > 1 : ", 10 > 1)
       }
+
+      console.log("-------------");
+
+      // 90이상은 A, 80이상은 B, 70이상은 C, 나머지는 F를 주는 if문 만들기
+      const score = 83;
+      let grade; // 값 안주고 일단 선언만. 아직 값 모르니까 (이때는 undefined 상태.)
+      if (score >= 90) {
+        grade = "A";
+      } else if (score >= 80) {
+        grade = "B";
+      } else if (score >= 70) {
+        grade = "C";
+      } else {
+        grade = "F";
+      }
+
+      console.log(grade);
+
+      let divText = `학생의 점수는 ${score}점이고, 등급은 ${grade}입니다.`;
+      document.getElementById("output").textContent = divText;
+
+      // 
     </script>
   </body>
 </html>

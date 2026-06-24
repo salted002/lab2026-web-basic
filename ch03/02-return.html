@@ -1,0 +1,89 @@
+<html>
+  <body>
+    <script>
+      function add(a, b) {
+        return a + b;
+      }
+
+      function multiply(a, b) {
+        return a * b;
+      }
+
+      // 함수 만드는 법 4가지
+      function first(a, b) {
+        return a * b;
+      }
+
+      const second = function(a, b) {
+        return a * b;
+      }
+
+      const third = (a, b) => {
+        return a * b;
+      }
+
+      const fourth = (a, b) => a * b;
+      const fourthOne = (a, b) => { return a * b };
+
+      // 1. 두 값을 받아서 한번에 계산하는 사칙연산 계산기 만들기
+      // 2. 키와 체중을 입력받는 BMI 계산기 만들기
+      // 입력받는 법: prompt 함수 사용
+
+      // 1. 사칙연산 계산기
+      const addNumbers = (x, y) => x + y;
+      const subtractNumbers = (x, y) => x - y;
+      const multiplyNumbers = (x, y) => x * y;
+      const divideNumbers = (x, y) => Math.floor(x / y);
+
+
+      function calculator() {
+        let x = prompt("사칙연산할 첫번째 수를 입력하세요.");
+        let y = prompt("사칙연산할 두번째 수를 입력하세요.");
+
+        x = Number(x);
+        y = Number(y);
+
+        let a, b, c, d;
+        a = addNumbers(x, y);
+        b = subtractNumbers(x, y);
+        c = multiplyNumbers(x, y);
+        d = divideNumbers(x, y);
+
+        alert(`합: ${a}, 차: ${b}, 곱: ${c}, 몫: ${d}`);
+      }
+
+      // calculator();
+
+      // 2. BMI 계산기 
+
+      const bmiCalculator = (height, weight) => {
+        const heightMeter = height / 100;
+        const index = weight / heightMeter ** 2;
+        const bmi = Math.round(index * 10) / 10; // 소수점 둘째 자리에서 반올림
+        // index.toFixed(1); 로 하면 소수점자리 1까지 정리 가능
+
+        let output;
+        if (bmi < 18.5) {
+          output = '저체중';
+        } else if (bmi < 23) {
+          output = '정상';
+        } else if (bmi < 25) {
+          output = '비만 전 단계(과체중)';
+        } else if (bmi < 30) {
+          output = '1단계 비만';
+        } else if (bmi < 35) {
+          output = '2단계 비만';
+        } else {
+          output = '3단계 비만(고도비만)';
+        }
+
+        alert(`당신의 BMI(체질량지수)는 ${bmi}이고, ${output}입니다.`);
+
+      }
+      const height = prompt('키를 cm 단위로 입력해주세요.');
+      const weight = prompt('몸무게를 kg 단위로 입력해주세요.');
+      bmiCalculator(height, weight);
+      
+    </script>
+  </body>
+</html>

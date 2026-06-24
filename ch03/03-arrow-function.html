@@ -1,0 +1,41 @@
+<html>
+  <body>
+    <h1>함수 만드는 방법</h1>
+    <script>
+      // 1. 함수 선언식
+      function double1(x) {
+        return x * 2;
+      }
+
+      // 2. 함수 표현식 (함수를 값처럼 상자(const)에 담기)
+      const double2 = function(x) {
+        return x * 2;
+      }
+
+      // 3. 화살표 함수
+      const double3 = x => {
+        return x * 2;
+      }
+
+      // 4. 화살표 함수를 한 줄로 쓰기
+      const double4 = x => x * 2;
+
+      // 연습 1
+      const greet1 = name => `안녕~ ${name}`;
+      console.log(greet1('hey'));
+
+      // 연습 2
+      const add1 = (x, y, z) => {
+        const sum = x * y + z;
+        const result = sum / 3;
+        return result;
+      }
+      console.log(add1(3, 6, 3));
+
+      // 연습 3
+      const triple = x => x * 3;
+      console.log(triple(2));
+
+    </script>
+  </body>
+</html>

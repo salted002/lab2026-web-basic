@@ -1,0 +1,131 @@
+<html>
+  <body>
+    <script>
+      // 배열 메소드 익히기
+
+      const cafes = ['매머드커피', '메가커피', '컴포즈커피', '투썸플레이스', '우지커피', '커피사피엔스', '더벤티'];
+      console.log('카페 목록:', cafes);
+
+      // 원본이 변경되는 함수: sort(), reverse(), splice() 
+
+      // 1. 배열의 (인덱스+1)번째 값 꺼내기
+      console.log(cafes[0]);
+
+      // 2. push() 로 맨 뒤에 값 추가하기
+      cafes.push('스타벅스');
+      console.log(cafes);
+
+      // 3. pop() 으로 맨 뒤의 값 삭제하기
+      cafes.pop();
+      console.log(cafes);
+
+      // 4. 인덱스로 선택하여 특정 값 바꾸기
+      console.log(cafes);
+      cafes[0] = '아마스빈';
+      console.log(cafes);
+
+      // 5. join() 으로 구분자를 포함해 값 이어붙이기
+      console.log(cafes.join(', '));
+
+      // 6. map으로 각 요소를 다른 값으로 맵핑하기(변환하기)
+      const users = [{name: 'Peter', age: 25}, {name: 'Alice', age: 13}];
+      users.map(user => user.name);
+      console.log(users); // map은 일시적 변환
+      console.log(users.map(user => user.name));
+      
+      // 7. 배열 탐색시 위치를 찾기 위한 indexOf() 와 includes()
+      console.log(cafes.includes('스타벅스')); // false
+      console.log(cafes.indexOf('아마스빈')); // 있으면 인덱스값, 없으면 -1
+      // => -1과 같은지를 비교하여 조건식 가능
+
+      // 8. filter() 로 조건에 맞는 요소 뽑기
+      const longNamedCafes = cafes.filter(cafe => cafe.length >= 5);
+      console.log(longNamedCafes);
+
+      // 9. find() 로 조건에 맞는 첫번째 요소 찾기
+      const youngUser = users.find(user => user.age < 20);
+      console.log(youngUser);
+
+      const oldUser = users.find(user => user.age > 50);
+      console.log(oldUser); // undefined
+
+      // 10. findIndex() 로 조건에 맞는 첫번째 인덱스 찾기
+      const youngUserIndex = users.findIndex(user => user.age < 20);
+      console.log(youngUserIndex); // 1 (2번째)
+
+      const oldUserIndex = users.findIndex(user => user.age > 50);
+      console.log(oldUserIndex); // -1
+
+      // 11. concat으로 두 배열 합치기
+      const bugs = ['파리', '무당벌레'];
+      const mammals = ['코끼리', '사람'];
+      
+      bugs.concat(mammals);
+      console.log(bugs); // 안 바뀜 (일시적) (뭐 상수긴하지만)
+
+      const animals = bugs.concat(mammals, '나비', ['기린', '금붕어']);
+      console.log(animals); // ['파리', '무당벌레', '코끼리', '사람', '나비', '기린', '금붕어']
+
+      // 12. sort()로 배열 정렬하기 ***아주 주의!! 원본이 변경됨!!!***
+      const numbers = [1, 7, 2, 3, 82, 9];
+      const strings = ['오범석', '연시은', '안수호', '이정찬', '한태훈', '금성제', '나백진', '최효만', '박후민', '고현탁', '서준태', '영이', '전석대'];
+
+        // (1) 매개변수(비교함수) 없이 썼을 때: 오름차순(문자열 유니코드 비교)
+        numbers.sort();
+        strings.sort();
+        console.log(numbers); // 주의: 1 2 3 7 82 9 순으로 정렬됨(문자열 비교)
+        console.log(strings);
+
+        // (2) 숫자일 경우 대소비교
+        numbers.sort((a, b) => a - b); // 요거 블로그에 써야겠다!!
+        console.log(numbers); // 숫자 오름차순(작은 순서) => 9와 82의 자리 바뀜
+
+        // (3) 역순 정렬하기
+        numbers.sort((a, b) => b - a); // 내림차순
+        console.log(numbers);
+        // 문자열을 역순으로 정렬하는 방법도 있을까? 이것도 블로그. > 아이건 바로밑에 reverse가 있네요 ㅎㅎ
+        
+      // 13. reverse() 로 배열을 역순으로 정렬하기 ***아주 주의!! 원본이 변경됨!!!***
+      numbers.reverse();
+      strings.reverse();
+
+      console.log(numbers); // 내림차순이었으니까 다시 오름차순으로 돌아옴
+      console.log(strings);
+
+      // 14. slice() 로 배열의 일부 추출하기 (원본 보존됨)
+      console.log(strings);
+        /* 현재 strings 배열: 
+          ['한태훈', '최효만', '전석대', '이정찬', '오범석', '영이', '연시은', '안수호', '서준태', '박후민', '나백진', '금성제', '고현탁']
+        */
+
+      const sliceArray = {
+        exam0: strings.slice(0),
+        // 인덱스 0에서 끝까지
+        // ['한태훈', '최효만', '전석대', '이정찬', '오범석', '영이', '연시은', '안수호', '서준태', '박후민', '나백진', '금성제', '고현탁']
+        exam1: strings.slice(1),
+        // 인덱스 1에서 끝까지
+        // ['최효만', '전석대', '이정찬', '오범석', '영이', '연시은', '안수호', '서준태', '박후민', '나백진', '금성제', '고현탁']
+        exam2: strings.slice(2),
+        // 인덱스 2에서 끝까지
+        // ['전석대', '이정찬', '오범석', '영이', '연시은', '안수호', '서준태', '박후민', '나백진', '금성제', '고현탁']
+        exam3: strings.slice(0, 1),
+        // 인덱스 0부터 인덱스 1의 앞까지(인덱스 1-1까지)
+        // ['한태훈']
+        exam4: strings.slice(2, 4),
+        // 인덱스 2부터 인덱스 3까지
+        // ['전석대', '이정찬']
+        exam5: strings.slice(2, 2),
+        // 인덱스 2부터 인덱스 2-1까지
+        // []
+        exam6: strings.slice(-2),
+        // 맨 뒤에서부터 2개 // 음수이
+        exam7: strings.slice(0, -2),
+        exam8: strings.slice(-2, 0),
+        exam9: strings.slice(4, 2)
+      };
+
+    console.log(sliceArray);
+
+    </script>
+  </body>
+</html>

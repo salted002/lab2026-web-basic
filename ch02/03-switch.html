@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title>switch문 연습하기</title>
+  </head>
+  <body>
+    <div>switch문은 범위가 아니라 정해진 값들과 같은지를 비교할 때 편리하다.</div>
+    <div id="output"></div>
+    <script>
+      const grade = "B";
+      let message;
+
+      switch (grade) {
+        case "A":
+          message = "참 잘했어요!";
+          break;
+        case "B":
+          message = "잘했어요.";
+          break;
+        default: // if-else문의 마지막 else문과 같다.
+          message = "수고했어요.";
+          // break; (마지막이기 때문에 break를 생략해도 된다.)
+      }
+
+      document.getElementById("output").textContent = message;
+
+    </script>
+  </body>
+</html>
