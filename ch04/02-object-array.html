@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>자바스크립트 객체 연습하기 (with 배열)</title>
+</head>
+<body>
+  <script>
+    // 객체 생성하는 법
+    // 1. 객체 생성자
+    let user = new Object();
+
+    // 2. 객체 리터럴
+    let student = {};
+
+    // 객체에 값 할당하기
+    // 1. 직접 할당
+    let film = {
+      title: 'weak hero',
+      role: '연시은'
+    }
+
+    console.log(film.title);
+
+    // 2. 값 지정해 넣기
+    film.isInNetflix  = true;
+
+    console.log(film);
+
+    // 3. delete 연산자로 값을 바로 삭제할 수 있다.
+    delete film.role;
+    console.log(film);
+    
+    // 4. Object.keys() 로 모든 키를 배열로 출력하기
+    const friend = {name: 'Alice', age: 25, city: 'Seoul'};
+
+    const keys = Object.keys(friend);
+    console.log(keys); // ['name', 'age', 'city']
+
+      // 4-1. Object.keys() 활용해서 모든 키와 값 출력하기
+      Object.keys(friend).forEach(key => {
+        console.log(`${key}: ${friend[key]}`); // 여기서 friend.key로 쓸 수 없음 => friend.name 은 키값을 확실하게 알 때 키값을 그대로 쓰는거임. 변수값일 때는 []로 감싸줘야함.
+      })
+    
+    // 5. Object.values() 로 모든 값을 배열로 출력하기
+    const values = Object.values(friend);
+    console.log(values);
+
+    // 6. 스프레드 연산자(...) 로 더 쉽게 복사하기
+    const concert = {
+      song: 'Matador',
+      genre: 'dance',
+    };
+
+    const concertCopy = {...concert};
+
+    const merged = {...concert, city: "Tokyo"};
+    console.log(merged);
+
+    const updated = {...concert, song: "I Wonder"};
+    console.log(updated);
+
+  </script>
+</body>
+</html>

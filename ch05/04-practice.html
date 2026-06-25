@@ -1,0 +1,105 @@
+<html>
+  <body>
+    <h1>
+      자바스크립트 종합 복습문제 (3문제)
+    </h1>
+    <script>
+      /* 문제 1.
+        온라인 쇼핑몰의 주문 데이터를 분석하는 함수를 만드시오.
+        
+        요구사항:
+        - 50,000원 이상의 주문만 필터링
+        - 각 주문에 배송료 추가 (주문액이 100,000 이상이면 무료, 아니면 3,000원)
+        - 주문액이 큰 순서대로 정렬
+        - 최종 결과: {orderId, customerName, originalPrice, shippingFee, totalPrice} 형태
+
+        다음 문법을 사용하세요:
+        - filter(50,000원 이상)
+        - map(배송료 계산 및 객체 변환)
+        - sort(가격순 내림차순)
+        - 삼항연산자(배송료 조건)
+        - 스프레드 연산자
+      */
+
+      const orders = [
+        {orderId: 'A001', customerName: 'Alice', price: 75000},
+        {orderId: 'A002', customerName: 'Bob', price: 45000},
+        {orderId: 'A003', customerName: 'Charlie', price: 120000},
+        {orderId: 'A004', customerName: 'David', price: 55000},
+        {orderId: 'A005', customerName: 'Eve', price: 98000},
+        {orderId: 'A006', customerName: 'Frank', price: 30000}
+      ];
+
+      // 함수이름은.. makeOrderData 로 하자.
+      const makeOrderData = arr => {
+        const orderData = arr.filter(o => o.price >= 50000)
+        .map(({orderId, customerName, price})=> { // 구조분해로 쓰는거 연습!!!
+          const shippingFee = price >= 100000 ? 0 : 3000;
+          return {
+            orderId,
+            customerName,
+            originalPrice: price,
+            shippingFee,
+            totalPrice: price + shippingFee,
+          }
+        })
+        return orderData;
+      }
+
+      console.log(makeOrderData(orders));      
+
+      /* 문제 2.
+        학생들의 여러 과목 성적을 받아서 평균, 학점, 합격 여부를 판단하는 프로그램을 만드시오.
+        
+        요구사항:
+        - 각 학생의 평균 점수 계산 (reduce 사용)
+        - 평균에 따라 학점 부여
+          90점 이상: A
+          80점 이상: B
+          70점 이상: C
+          70점 미만: F
+        - 70점 미만은 불합격 (filter로 제외)
+        - 합격한 학생만 최종 결과 출력
+        - 최종 결과: {name, subjects, average, grade, status} 형태
+          (status: "합격" 또는 "불합격")
+        
+        다음 문법을 사용하세요.
+        - Object.values() (점수 배열 추출)
+        - reduce (평균 계산)
+        - 삼항연산자 (학점 판단)
+        - filter (70점 이상만)
+        - map (결과 객체 변환)
+        - sort (평균 내림차순)
+        - toFixed() (소수점 처리)
+        - 구조분해할당
+      */
+      const students = [
+        {name: 'Alice', scores: {korean: 85, math: 92, english: 88}},
+        {name: 'Bob', scores: {korean: 65, math: 70, english: 68}},
+        {name: 'Charlie', scores: {korean: 92, math: 88, english: 95}},
+        {name: 'David', scores: {korean: 78, math: 82, english: 75}},
+        {name: 'Eve', scores: {korean: 95, math: 91, english: 93}}
+      ];
+
+      const output = students.map(
+        s => {
+          const scoreboard = Object.values(s.scores);
+          const average = scoreboard.reduce((acc, cur) => {
+            return acc + cur;
+          }, 0) / scoreboard.length;
+          const grade = average >= 90 ? 'A' : average >= 80 ? 'B' : average >= 70 ? 'C' : 'D';
+
+          return {
+            ...s,
+            subjects: scoreboard.length,
+            average: average.toFixed(2)*1,
+            grade
+          }
+        }
+      )
+      console.log(output);
+      
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+<html>
+  <body>
+    
+    <script>
+      const products = [
+        { name: "아메리카노", price: 1500, category: "음료" },
+        { name: "카페라떼", price: 2000, category: "음료" },
+        { name: "케이크", price: 8000, category: "디저트" },
+        { name: "쿠키", price: 4500, category: "디저트" },
+        { name: "밀크티", price: 5000, category: "음료" },
+        { name: "수박주스", price: 6000, category: "주스" },
+        { name: "오렌지주스", price: 4500, category: "주스" },
+        { name: "팥빙수", price: 12000, category: "빙수" },
+        { name: "망고빙수", price: 18000, category: "빙수" },
+      ];
+
+      // 1. 음료만 새 배열로
+      const drinks = products.filter(
+        p => p.category === "음료"
+      )
+      console.log(drinks);
+
+      // 2. 각 음료의 이름만 배열로
+      const nameOfDrinks = drinks.map(
+        d => d.name
+      )
+      console.log(nameOfDrinks);
+
+      // 3. 음료 가격의 합계
+      const sumOfDrinks = drinks.reduce((acc, cur) => {
+        return acc + cur.price;
+      }, 0)
+      console.log(sumOfDrinks);
+
+      // 4. 10% 할인 가격으로 새 배열 => 연습필요!
+      const discountedProducts = products.map(
+        (p) => ({
+          ...p,
+          price: p.price * 0.9,
+        })
+      )
+      console.log(discountedProducts);
+
+      // 5. 디저트만 골라서 가격의 합계
+      const dessertsPrice = products
+      .filter(p => p.category === "디저트")
+      .map(p => p.price)
+      .reduce((acc, cur) => {
+        return acc + cur;
+      });
+      console.log(dessertsPrice);
+
+      // 6. 새 메뉴 추가
+      const newProducts = [
+        ...products,
+        {name: "샌드위치", price: 5500, category: "식사",}
+      ]
+      console.log(newProducts);
+
+    </script>
+  </body>
+</html>

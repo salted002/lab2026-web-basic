@@ -1,0 +1,148 @@
+<html>
+  <body>
+    <script>
+      const products = [
+        {name: '아메리카노', price: 1600},
+        {name: '말차라떼', price: 3800},
+        {name: '바닐라라떼', price: 2300},
+        {name: '딸기스무디', price: 5000},
+        {name: '키위주스', price: 6000},
+        {name: '티라미수', price: 4500},
+        {name: '카페라떼', price: 3000},
+      ]
+
+      // products 배열에서 제품 가격이 4000원보다 적은 제품만 찾아 배열로 반환하기
+      // for문과 if문으로 찾기
+      const cheapProducts = [];
+      for(let i = 0; i < products.length; i++){
+        if (products[i].price < 4000) {
+          cheapProducts.push(products[i]);
+        }
+      }
+      console.log(cheapProducts);
+
+      // filter문으로 찾기: 가격이 2000원보다 큰 제품
+      const expensiveProducts = products.filter(
+        product => product.price > 2000
+      );
+      console.log(expensiveProducts);
+
+      // filter문으로 찾기: 가격이 5000원보다 크거나 같은 제품
+      const specialProducts = products.filter(
+        p => p.price >= 5000
+      );
+      console.log(specialProducts);
+
+      // filter문으로 찾기: 라떼 종류 중 3000원이 넘지 않는 제품
+      const cheapLattes = products.filter(
+        p => {
+          return p.name.includes("라떼") && p.price <= 3000;
+        }
+      )
+      console.log(cheapLattes);
+
+      // find() 써보기
+      const kiwiJuice = products.find(p => p.name = '키위주스');
+      console.log(kiwiJuice);
+
+      const orangeJuice = products.find(p => p.name === '오렌지주스');
+      console.log(orangeJuice); // undefined
+
+      // map()과 filter() 조합 문제 연습하기
+      // 문제 1. 사용자 배열에서 활성(active: true)된 사용자만 필터링한 후, 각 사용자의 이름과 이메일만 포함한 새로운 형태로 변환하시오.
+      const users = [
+        {id: 1, name: 'Alice', email: 'alice@example.com', active: true},
+        {id: 2, name: 'Bob', email: 'bob@example.com', active: false},
+        {id: 3, name: 'Charlie', email: 'charlie@example.com', active: true},
+        {id: 4, name: 'David', email: 'david@example.com', active: false},
+        {id: 5, name: 'Eve', email: 'eve@example.com', active: true}
+      ];
+
+      // 0. 내 풀이
+      const activeUsers = users.filter(u => u.active);
+      const newUsersList = activeUsers.map(
+        u => {
+          const user = {
+            name: u.name,
+            email: u.email,
+          }
+          return user;
+        }
+      )
+      console.log(newUsersList);
+
+      // 1. 체인 연결 + 한 줄로
+      const newUsersList1 = users
+      .filter(u => u.active)
+      .map(u => ({
+        name: u.name,
+        email: u.email,
+      }));
+      console.log(newUsersList1);
+
+      // 2. 객체 생성에서 중괄호 쓰려면
+      const newUsersList2 = users
+      .filter(u => u.active)
+      .map(u => {
+        return {
+          name: u.name,
+          email: u.email,
+        }
+      })
+      console.log(newUsersList2);
+
+      // 3. 스프레드 & 프로퍼티 제거 사용하기 **중요! 고급!**
+      const newUsersList3 = users
+      .filter(u => u.active)
+      .map(({id, active, ...rest}) => rest);
+      // id, active 빼고 name, email만 남김.
+      console.log(newUsersList3);
+
+      // 4. 구조분해할당으로 깔끔하게 **중요! 고급!**
+      const newUsersList4 = users
+      .filter(u => u.active)
+      .map(({name, email}) => ({name, email})); // 뒤의 {name, email}을 반드시 소괄호로 감싸야 블록이 아닌 객체가 됨!
+      
+
+      // 문제 2. 학생 배열에서 점수가 70점 이상인 학생만 필터링한 후, 각 학생의 이름과 학점을 계산해서 추가하시오.
+      const students = [
+        {name: 'Alice', score: 85},
+        {name: 'Bob', score: 65},
+        {name: 'Charlie', score: 92},
+        {name: 'David', score: 58},
+        {name: 'Eve', score: 78},
+        {name: 'Frank', score: 88}
+      ];
+
+      const scoreboard = students
+      .filter(s => s.score >= 70)
+      .map(s => {
+        let grade;
+        if(s.score >= 90) {
+          grade = 'A';
+        } else if(s.score >= 80) {
+          grade = 'B';
+        } else {
+          grade = 'C';
+        }
+        return {
+          ...s,
+          grade: grade,
+        }
+      })
+
+      console.log(scoreboard);
+
+      // 문제 2의 다른 풀이 1. 삼항연산자 사용하기
+      const scoreboard1 = students
+      .filter(s => s.score >= 70)
+      .map(s => ({
+        ...s,
+        grade: s.score >= 90 ? 'A' : s.score >= 80 ? 'B' : 'C',
+      }))
+
+      console.log(scoreboard1)
+
+    </script>
+  </body>
+</html>

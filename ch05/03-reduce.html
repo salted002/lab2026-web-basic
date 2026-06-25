@@ -1,0 +1,37 @@
+<html>
+  <body>
+    <script>
+      // reduce 함수 연습하기
+      // .reduce(function(accumulator, item, index, array) {}, [initial])
+        // accumulator: 이전 함수 호출의 결과. (최초 호출시 사용할 초깃값은 initial)
+        // item: 현재 배열 요소
+        // index: 요소 위치
+        // array: 배열
+        
+      let arr = [1, 2, 3, 4, 5];
+      let result = arr.reduce((sum, current) => sum + current, 0)
+      // 콜백함수: (sum, current) => sum + current
+        // 여기서 sum은 accumulator, current는 현재 배열 요소에 해당한다.
+        // 보통 이렇게 인수 두 개만 받는다.
+      // 최초 함수가 호출되면 함수 인수의 초깃값으로 마지막 인수인 0이 할당된다. 즉 함수의 sum인자로 0, current인자로는 첫번째 요소인 1이 할당된다. 따라서 함수의 결과는 1이다.
+      // 두번째 호출시, 이전 결과인 1이 sum, 두번째 요소인 2가 current에 할당되고, 결과는 3이다.
+      // ...끝까지.
+
+      // reduce로 합계 계산하기
+      const cart = [
+        {name: '아메리카노', price: 1600, quantity: 2},
+        {name: '말차라떼', price: 3800, quantity: 1},
+        {name: '바닐라라떼', price: 2300, quantity: 3},
+        {name: '딸기스무디', price: 5000, quantity: 1}
+      ];
+
+      const priceSum = cart.reduce((acc, cur) => {
+        return acc + (cur.price * cur.quantity);
+      }, 0);
+    
+      console.log(priceSum);
+
+
+    </script>
+  </body>
+</html>
