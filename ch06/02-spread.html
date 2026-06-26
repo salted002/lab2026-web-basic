@@ -1,0 +1,56 @@
+<html>
+  <body>
+    <script>
+      const fruits = ['사과', '바나나']
+      const more = ['포도', '귤']
+      const fruitsMore = [...fruits, ...more]
+      console.log(fruitsMore)
+
+      // 문제 3. 중첩 배열 + 구조분해 문제
+      const comments = [
+        { id: 1, author: { name: '김철수', role: 'admin' }, text: '좋아요' },
+        { id: 2, author: { name: '이영희', role: 'user' }, text: '감사합니다' },
+        { id: 3, author: { name: '박민준', role: 'user' }, text: '흥미로워요' },
+      ]
+
+      const authors = comments.map(({ author: { name }, text }) => ({
+        name,
+        text,
+      }))
+      console.log(authors)
+
+      // 문제 4.
+      const defaultConfig = {
+        theme: 'light',
+        fontSize: 14,
+        language: 'ko',
+        autoSave: true,
+      }
+
+      const userConfig = {
+        theme: 'dark',
+        fontSize: 16,
+      }
+
+      const systemConfig = {
+        language: 'en',
+        maxRetry: 3,
+      }
+
+      const newObj = { ...defaultConfig, ...userConfig, ...systemConfig }
+      console.log(newObj)
+
+      // 문제 5.
+      const products = [
+        { id: 1, name: '아이폰', price: 1000000, inStock: true, rating: 4.8 },
+        { id: 2, name: '갤럭시', price: 900000, inStock: false, rating: 4.5 },
+        { id: 3, name: '픽셀', price: 800000, inStock: true, rating: 4.6 },
+      ]
+
+      const newProducts = products
+        .filter((p) => p.inStock)
+        .map(({ id, name }) => ({ id, name }))
+      console.log(newProducts)
+    </script>
+  </body>
+</html>

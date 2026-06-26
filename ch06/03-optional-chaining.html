@@ -1,0 +1,55 @@
+<html>
+  <body>
+    <script>
+      const company = {
+        name: 'TechCorp',
+        departments: [
+          {
+            name: 'Engineering',
+            manager: { name: 'Alice', email: 'alice@tech.com' },
+          },
+          {
+            name: 'Sales',
+            manager: null,
+          },
+        ],
+      }
+
+      // 1.
+      console.log(company.departments?.[0].manager?.email ?? 'No Manager email')
+      console.log(company.departments?.[1].manager?.name ?? 'Unknown')
+      console.log(company.departments?.[2] ?? 'Department not found')
+
+      // 2.
+      const config = {
+        database: {
+          connect: () => 'Connected to DB',
+          disconnect: null,
+        },
+        cache: null,
+        logger: {
+          log: (msg) => `[LOG] ${msg}`,
+        },
+      }
+
+      console.log(config.database?.connect?.() ?? 'Connection failed')
+      console.log(config.database?.disconnect?.() ?? 'Disconnect unavailable')
+      console.log(config.cache?.getSettings?.() ?? { theme: 'dark' })
+      console.log(config.logger?.log?.('test') ?? 'Logging unavailable')
+
+      // 선생님문제
+      const memberWithBio = {
+        name: '다니엘',
+        profile: {
+          bio: '카페 단골입니다.',
+        }
+      }
+      const memberNoBio = {
+        name: '해린',
+      }
+
+      // 해린 바이오
+      console.log(memberNoBio.profile?.bio ?? '바이오가 없습니다.')
+    </script>
+  </body>
+</html>

@@ -1,0 +1,126 @@
+<html>
+  <body>
+    <script>
+      const colors = ['red', 'green', 'blue', 'orange']
+      console.log(colors.slice(0, 2))
+
+      const [red, green] = colors
+      console.log(red, green)
+
+      // 연습문제 1
+      // const nums = [1, 2, 3, 4, 5]
+      // const [a, b] = nums
+      // console.log(a, b)
+
+      // 연습
+      const arr = [10, 20, 30, 40]
+      const [a, , c] = arr
+      const d = arr[arr.length - 1]
+      console.log(d)
+      const [f, ...rest] = arr
+
+      const person = { name: '철수', age: 25, city: '서울' }
+      // const { name, age } = person
+      // console.log(name, age)
+
+      // const user = { name: '영희', role: 'user' }
+      // // role이 없으면 admin 사용, 없는 email은 no-email
+      // const { name, role = 'admin', email = 'no-email' } = user
+      // console.log(name, role, email)
+
+      // const student = {
+      //   name: '민수',
+      //   scores: { math: 90, english: 85 },
+      // }
+      // const {
+      //   name,
+      //   scores: { math },
+      // } = student
+
+      // 연습 1
+      const apiResponse = {
+        status: 200,
+        data: {
+          user: { id: 1, name: '김철수', email: 'kim@example.com' },
+          posts: 15,
+        },
+        timestamp: '2024-01-15',
+      }
+      // user 객체만 추출
+      // const {
+      //   data: { user },
+      // } = apiResponse
+      // console.log(user)
+
+      // user의 name과 email만 출력
+      // const {
+      //   data: {
+      //     user: { name, email },
+      //   },
+      // // } = apiResponse
+      // console.log(name, email)
+
+      // 연습 2.
+      const product = {
+        id: 101,
+        name: '노트북',
+        price: 1500000,
+        stock: 50,
+        category: '전자기기',
+        description: '매우 좋은 노트북',
+      }
+      // id, name, price만 추출해 객체로 만들기
+      // const { id, name, price } = product
+      // console.log(id)
+      // const newObj = { id, name, price }
+      // console.log(newObj)
+
+      //
+      const member = {
+        memberName: '민준',
+        grade: '골드',
+        point: 12000,
+        favorite: '카페라떼',
+      }
+      const { memberName, grade } = member
+      console.log(memberName, grade)
+
+      const { point, favorite } = member
+      console.log(point, favorite)
+
+      const receipt = { drink: '아메리카노', price: 3000 }
+      const { drink, price, tip = 0 } = receipt
+      console.log(drink, price, tip)
+
+      //
+      const user = {
+        id: 1,
+        name: '이순신',
+        role: 'user',
+      }
+
+      const updates = {
+        role: 'admin',
+        lastLogin: '2024-01-15',
+      }
+
+      const merged = { ...user, ...updates }
+      console.log(merged)
+
+      //
+      const employees = [
+        { id: 1, name: '홍길동', dept: '개발팀', salary: 5000 },
+        { id: 2, name: '박영희', dept: '디자인팀', salary: 4500 },
+        { id: 3, name: '이민수', dept: '개발팀', salary: 5200 },
+      ]
+
+      const newArr = employees.map(({ name, dept }) => ({
+        name,
+        dept,
+      }))
+      console.log(newArr)
+
+
+    </script>
+  </body>
+</html>

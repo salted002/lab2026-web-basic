@@ -1,0 +1,27 @@
+<html>
+  <body>
+    <script>
+      console.log('1')
+      const fetchPromise = fetch('https://jsonplaceholder.typicode.com/users/1')
+      console.log('2')
+      fetchPromise.then((response) => {
+        console.log('4', response)
+        // 성공 시 처리할 작업을 기술한다.
+      }).catch(() => {
+        // 실패(오류) 시 처리할 작업을 기술한다.
+      })
+      console.log('3')
+
+      /*
+        Promise: 나중에 결과를 돌려주겠다는 약속을 담은 객체.
+        시간이 걸리는 일(fetch, 파일 읽기, DB에서 직접 읽기 등...)
+        Promise는 그 결과가 언제 온다는 약속을 객체로 돌려준다.
+
+        Promise의 3가지 상태
+        - pending: 아직 진행 중(대기 중)
+        - fulfilled: 성공(작업이 끝남 → .then()함수가 실행된다.)
+        - rejected: 실패 → .catch()함수가 실행된다.
+      */
+    </script>
+  </body>
+</html>

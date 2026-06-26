@@ -1,12 +1,10 @@
 <html>
   <body>
-    <h1>
-      자바스크립트 종합 복습문제 (3문제)
-    </h1>
+    <h1>자바스크립트 종합 복습문제 (3문제)</h1>
     <script>
       /* 문제 1.
         온라인 쇼핑몰의 주문 데이터를 분석하는 함수를 만드시오.
-        
+
         요구사항:
         - 50,000원 이상의 주문만 필터링
         - 각 주문에 배송료 추가 (주문액이 100,000 이상이면 무료, 아니면 3,000원)
@@ -22,35 +20,38 @@
       */
 
       const orders = [
-        {orderId: 'A001', customerName: 'Alice', price: 75000},
-        {orderId: 'A002', customerName: 'Bob', price: 45000},
-        {orderId: 'A003', customerName: 'Charlie', price: 120000},
-        {orderId: 'A004', customerName: 'David', price: 55000},
-        {orderId: 'A005', customerName: 'Eve', price: 98000},
-        {orderId: 'A006', customerName: 'Frank', price: 30000}
-      ];
+        { orderId: 'A001', customerName: 'Alice', price: 75000 },
+        { orderId: 'A002', customerName: 'Bob', price: 45000 },
+        { orderId: 'A003', customerName: 'Charlie', price: 120000 },
+        { orderId: 'A004', customerName: 'David', price: 55000 },
+        { orderId: 'A005', customerName: 'Eve', price: 98000 },
+        { orderId: 'A006', customerName: 'Frank', price: 30000 },
+      ]
 
       // 함수이름은.. makeOrderData 로 하자.
-      const makeOrderData = arr => {
-        const orderData = arr.filter(o => o.price >= 50000)
-        .map(({orderId, customerName, price})=> { // 구조분해로 쓰는거 연습!!!
-          const shippingFee = price >= 100000 ? 0 : 3000;
-          return {
-            orderId,
-            customerName,
-            originalPrice: price,
-            shippingFee,
-            totalPrice: price + shippingFee,
-          }
-        })
-        return orderData;
+      const makeOrderData = (arr) => {
+        const orderData = arr
+          .filter((o) => o.price >= 50000)
+          .map(({ orderId, customerName, price }) => {
+            // 구조분해로 쓰는거 연습!!!
+            const shippingFee = price >= 100000 ? 0 : 3000
+            return {
+              orderId,
+              customerName,
+              originalPrice: price,
+              shippingFee,
+              totalPrice: price + shippingFee,
+            }
+          })
+          .sort((a, b) => b.totalPrice - a.totalPrice)
+        return orderData
       }
 
-      console.log(makeOrderData(orders));      
+      console.log(makeOrderData(orders))
 
       /* 문제 2.
         학생들의 여러 과목 성적을 받아서 평균, 학점, 합격 여부를 판단하는 프로그램을 만드시오.
-        
+
         요구사항:
         - 각 학생의 평균 점수 계산 (reduce 사용)
         - 평균에 따라 학점 부여
@@ -62,7 +63,7 @@
         - 합격한 학생만 최종 결과 출력
         - 최종 결과: {name, subjects, average, grade, status} 형태
           (status: "합격" 또는 "불합격")
-        
+
         다음 문법을 사용하세요.
         - Object.values() (점수 배열 추출)
         - reduce (평균 계산)
@@ -74,32 +75,150 @@
         - 구조분해할당
       */
       const students = [
-        {name: 'Alice', scores: {korean: 85, math: 92, english: 88}},
-        {name: 'Bob', scores: {korean: 65, math: 70, english: 68}},
-        {name: 'Charlie', scores: {korean: 92, math: 88, english: 95}},
-        {name: 'David', scores: {korean: 78, math: 82, english: 75}},
-        {name: 'Eve', scores: {korean: 95, math: 91, english: 93}}
-      ];
+        { name: 'Alice', scores: { korean: 85, math: 92, english: 88 } },
+        { name: 'Bob', scores: { korean: 65, math: 70, english: 68 } },
+        { name: 'Charlie', scores: { korean: 92, math: 88, english: 95 } },
+        { name: 'David', scores: { korean: 78, math: 82, english: 75 } },
+        { name: 'Eve', scores: { korean: 95, math: 91, english: 93 } },
+      ]
 
-      const output = students.map(
-        s => {
-          const scoreboard = Object.values(s.scores);
-          const average = scoreboard.reduce((acc, cur) => {
-            return acc + cur;
-          }, 0) / scoreboard.length;
-          const grade = average >= 90 ? 'A' : average >= 80 ? 'B' : average >= 70 ? 'C' : 'D';
+      // 아래 풀이... 틀림.
 
-          return {
-            ...s,
-            subjects: scoreboard.length,
-            average: average.toFixed(2)*1,
-            grade
-          }
+      const output = students.map((s) => {
+        const scoreboard = Object.values(s.scores)
+        const average =
+          scoreboard.reduce((acc, cur) => {
+            return acc + cur
+          }, 0) / scoreboard.length
+        const grade =
+          average >= 90 ? 'A' : average >= 80 ? 'B' : average >= 70 ? 'C' : 'D'
+
+        return {
+          ...s,
+          subjects: scoreboard.length,
+          average: average.toFixed(2) * 1,
+          grade,
         }
-      )
-      console.log(output);
-      
+      })
+      console.log(output)
 
+      /* 문제 3.
+        온라인 마켓의 상품 데이터를 분석해서 판매 현황과 재고 상태를 보고하는 프로그램을 만드시오.
+
+        요구사항:
+        - 활성 상품만 필터링 (status: 'active')
+        - 카테고리별 판매액 합계 계산 (reduce로 객체 생성)
+        - 각 상품의 정보 변환:
+          {productId, name, category, soldAmount, remainingStock, totalRevenue}
+          remainingStock = stock - sold
+          totalRevenue = price × sold
+        - 재고 부족 상품 (remainingStock < 10)은 따로 경고 메시지 추가
+        - 판매액 기준 내림차순 정렬
+
+        다음 문법을 사용하세요.
+        - filter (활성 상품만)
+        - map (정보 변환)
+        - sort (판매액 내림차순)
+        - reduce (카테고리별 합계)
+        - 삼항연산자 (warning 메시지)
+        - Object.entries() (카테고리 순회)
+        - includes() (조건 확인)
+        - 스프레드 연산자
+        - 구조분해할당
+      */
+      const products = [
+        {
+          productId: 'P001',
+          name: '노트북',
+          category: '전자제품',
+          price: 1500,
+          stock: 50,
+          sold: 30,
+          status: 'active',
+        },
+        {
+          productId: 'P002',
+          name: '펜',
+          category: '문구류',
+          price: 2,
+          stock: 200,
+          sold: 150,
+          status: 'active',
+        },
+        {
+          productId: 'P003',
+          name: '책상',
+          category: '가구',
+          price: 80,
+          stock: 15,
+          sold: 5,
+          status: 'inactive',
+        },
+        {
+          productId: 'P004',
+          name: '의자',
+          category: '가구',
+          price: 45,
+          stock: 8,
+          sold: 10,
+          status: 'active',
+        },
+        {
+          productId: 'P005',
+          name: '모니터',
+          category: '전자제품',
+          price: 200,
+          stock: 20,
+          sold: 12,
+          status: 'active',
+        },
+        {
+          productId: 'P006',
+          name: '키보드',
+          category: '전자제품',
+          price: 80,
+          stock: 30,
+          sold: 25,
+          status: 'active',
+        },
+      ]
+
+      const productReport = products
+        .filter((p) => {
+          return p.status === 'active'
+        }) // filter()로 활성 상품만 필터링
+        .map(({ productId, name, category, price, stock, sold }) => {
+          const remainingStock = stock - sold
+          const totalRevenue = price * sold
+          let warning
+          if (remainingStock < 0) {
+            warning = `⚠️ 재고 초과 판매! (${remainingStock}개)`
+          } else if (remainingStock < 10) {
+            warning = `⚠️ 재고 부족! (${remainingStock}개 남음)`
+          } else {
+            warning = null
+          }
+          return {
+            productId,
+            name,
+            category,
+            remainingStock,
+            totalRevenue,
+            warning,
+          }
+        })
+        .sort((a, b) => b.totalRevenue - a.totalRevenue)
+      console.log(productReport)
+
+      const categoryTotal = productReport.reduce(
+        (obj, product) => ({
+          ...obj,
+          [product.category]:
+            (obj[product.category] || 0) + product.totalRevenue, // || 0 은 왼쪽 값이 있으면 그걸 사용하고 없으면 0.
+        }),
+        {},
+      )
+      console.log(categoryTotal)
     </script>
   </body>
 </html>

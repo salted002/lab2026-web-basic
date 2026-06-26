@@ -1,0 +1,11 @@
+<html>
+  <body>
+    <script>
+      console.log('1. 첫번째 줄')
+      setTimeout(() => {
+        console.log('3. setTimeout 안')
+      }, 100) // 0.1초 후에 setTimeout 안의 함수를 실행하라는 의미. (비동기로 아래 코드까지 실행된 후 실행된다.)
+      console.log('2. 두번째 줄')
+    </script>
+  </body>
+</html>
