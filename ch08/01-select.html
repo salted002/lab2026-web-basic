@@ -1,0 +1,116 @@
+<html>
+  <!-- 제목 인코딩 정보, 스타일 등 화면 밖 정보 관리 (head 태그) -->
+  <head>
+    <title>요소 선택하기</title>
+    <!-- 디자인 요소 정의하기 (style 태그 | CSS문법 사용) -->
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 24px;
+        font-size: 16px;
+      }
+      .box {
+        background-color: lavender;
+        font-size: 18px;
+        height: 100px;
+      }
+      #name {
+        font-size: 16px;
+        color: blueviolet;
+      }
+      button {
+        font-size: 14px;
+        height: 28px;
+        cursor: pointer;
+      }
+    </style>
+    <script>
+      // 자바스크립트 코드 넣는 곳 (script 태그)
+    </script>
+  </head>
+  <body>
+    <h1 id="hello">요소 선택 : document.querySelector()</h1>
+    <p class="box">클래스로 지정할 박스</p>
+    <label for="menu">추가할 메뉴 이름</label>
+    <input id="menu" type="text" placeholder="메뉴 이름을 정확히 입력하세요." />
+    <button type="button" id="createBtn">클릭하면 새 요소가 생기는 버튼</button>
+    <h2>메뉴 목록</h2>
+    <ul id="list"></ul>
+    <p id="message">과연.... 어떻게 될 것인가....</p>
+    <div>
+      <strong>점심식사 메뉴</strong>는 뭐로 할까요.<br />그냥 삼각김밥이나
+      먹읍시다. 귀찮은데.
+    </div>
+    <a href="https://www.naver.com">네이버로 이동하기</a>
+    <br />
+    <img
+      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEnCg4Cl0XYgkJWR555tDPi03Nr5j5WrMwJw&s"
+      alt=""
+    />
+    <ul>
+      <!--unordered list-->
+      <li>메뉴 1: 아메리카노</li>
+      <li>메뉴 2: 밀크티</li>
+      <li>메뉴 3: 딸기주스</li>
+      <li>메뉴 4: 오렌지스무디</li>
+    </ul>
+    <ol>
+      <!--ordered list-->
+      <li>디저트: 말차 케이크</li>
+      <li>디저트: 치즈 케이크</li>
+      <li>디저트: 감귤</li>
+      <li>디저트: 두쫀쿠</li>
+    </ol>
+    <label for="name">이름</label>
+    <input id="name" type="text" placeholder="본명을 입력하세요." />
+    <button type="button" id="nameBtn">확인</button>
+    <div class="box">
+      <!--블록 지정: 한 줄 전체를 차지한다.-->
+      <p>내용 입력 영역</p>
+    </div>
+    <span class="box">헤이</span>
+    헤이
+
+    <script>
+      const hello = document.querySelector('#hello')
+      console.log('선택된 요소:', hello)
+
+      hello.textContent = 'textContent로 글자 변경하기'
+      hello.style.color = 'crimson'
+      hello.style.fontSize = '24px'
+
+      const box = document.querySelector('.box')
+
+      box.textContent = 'class는 점(.), id는 샵(#)으로 선택합니다.'
+      box.style.color = 'teal'
+
+      const message = document.querySelector('#message')
+
+      message.style.color = 'blue'
+      message.style.fontSize = '34px'
+
+      const nameInput = document.querySelector('#name')
+      const nameBtn = document.querySelector('#nameBtn')
+
+      nameBtn.addEventListener('click', () => {
+        const name = nameInput.value
+        message.textContent = `반갑습니다, ${name}님!`
+      })
+
+      const createInput = document.querySelector('#menu')
+      const createBtn = document.querySelector('#createBtn')
+
+      createBtn.addEventListener('click', () => {
+        const text = createInput.value
+        if (text === '') return
+
+        const li = document.createElement('li')
+        li.textContent = text
+        list.append(li)
+
+        createInput.value = ''
+        createInput.focus()
+      })
+    </script>
+  </body>
+</html>
