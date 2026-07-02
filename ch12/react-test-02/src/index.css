@@ -67,6 +67,11 @@ button {
   color: #fff;
   cursor: pointer;
 }
+
+button.add {
+  font-size: 1.65rem;
+  padding: 7px 14px;
+}
 button:hover {
   background: #3b73ee;
 }
@@ -105,8 +110,8 @@ li.todo-item:last-child {
 li.todo-item .text {
   flex: 1;
 }
-/* 완료된 항목은 줄을 긋고 흐리게 — done 클래스로 표시 */
-li.todo-item .text.done {
+/* 완료된 항목은 줄을 긋고 흐리게 — completed 클래스로 표시 */
+li.todo-item .text.completed {
   text-decoration: line-through;
   color: #aaa;
 }
