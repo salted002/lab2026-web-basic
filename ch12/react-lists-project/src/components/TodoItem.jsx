@@ -6,7 +6,6 @@ export default function TodoItem({ todo, onToggle, onDelete }) {
         checked={todo.done}
         onChange={() => onToggle(todo.id)}
       />
-    
 
       <span className={`text ${todo.done ? 'done' : ''}`}>{todo.text}</span>
 

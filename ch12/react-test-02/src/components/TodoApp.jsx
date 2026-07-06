@@ -42,7 +42,11 @@ export default function TodoApp() {
     const trimmed = text.trim()
     if (trimmed === '') return // 공백 제거한 후 빈 문자열이면 아무 동작 없이 리턴
 
-    const newTodo = { id: crypto.randomUUID(), text: trimmed, done: false }
+    const newTodo = {
+      id: crypto.randomUUID(),
+      text: trimmed,
+      status: 'notStarted',
+    }
     setTodos((prev) => [...prev, newTodo])
     setText('') // 설정 후에는 입력 상태값을 비워준다.
   }
@@ -51,10 +55,18 @@ export default function TodoApp() {
   const handleStatusChange = () => {}
 
   // 할 일 항목 목록(배열)에서 삭제하기 *setTodos
-  const handleDelete = () => {}
+  const handleDelete = (id) => {
+    setTodos((prev) => prev.filter((todo) => todo.id !== id))
+  }
 
   // 할 일 항목의 내용(text) 수정하기 *setTodos
-  const handleEdit = () => {}
+  const handleEdit = (id, newText) => {
+    const trimmed = newText.trim()
+    if (trimmed === '') return
+    setTodos((prev) =>
+      prev.map((todo) => (todo.id === id ? { ...todo, text: trimmed } : todo)),
+    )
+  }
 
   /* state 수정 없이, 화면 그릴 때 즉석에서 만드는 값 */
   // 화면에 출력할 할 일 목록 : filter값과 status값이 일치할 때
