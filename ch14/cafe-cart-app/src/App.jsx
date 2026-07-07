@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import './App.css'
 import ProductList from './components/ProductList'
+import CartSummary from './components/CartSummary'
+import Card from './components/Card'
 
 const PRODUCTS = [
   { id: 1, name: '콜드브루 연유 라떼', price: 4500 },
@@ -35,10 +37,35 @@ function App() {
     setCart((prevCart) => prevCart.filter((item) => item.id !== id))
   }
 
+  const handleChangeQuantity = (id, diff) => {
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.id === id
+          ? { ...item, quantity: Math.max(1, item.quantity + diff) }
+          : item,
+      ),
+    )
+  }
+
+  const handleClear = () => {
+    setCart([])
+  }
+
   return (
     <>
       <h1>카페 장바구니</h1>
-      <ProductList products={PRODUCTS} />
+      <Card title="상품 목록">
+        <ProductList products={PRODUCTS} onAdd={handleAdd} />
+      </Card>
+
+      <Card title="장바구니">
+        <CartSummary
+          items={cart}
+          onRemove={handleRemove}
+          onChangeQuantity={handleChangeQuantity}
+          onClear={handleClear}
+        />
+      </Card>
     </>
   )
 }
