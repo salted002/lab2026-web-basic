@@ -1,43 +1,65 @@
-// 연습용 가짜 서버. 응답을 흉내내고 실제로 저장하지는 않는다.
-const BASE_URL = 'https://jsonplaceholder.typicode.com/posts'
+/*
+ * posts API 요청 함수 모음
+ */
 
-/* 서버와의 모든 대화(CRUD)를 각각 함수 하나로 만들어, fetch()로 요청을 보낸다.
-   모든 함수는 응답이 정상인지를 (res.ok)로 먼저 확인하고, 아닐 경우 메시지와 함께 오류를 던진다.
-   모든 서버와 관련된 작업은 이 파일 안에 있으므로, 서버가 바뀌면 이 파일만 고치면 된다.
-*/
+// 연습용 SUPABASE 서버
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY
 
-// 1. 읽기(Read): GET /posts — 글 목록을 받아온다.
-export const getPost = async () => {
-  const res = await fetch(`${BASE_URL}?_limit=5`)
-  if (!res.ok) throw new Error('글 목록을 불러오지 못했습니다.')
-  return res.json()
+const headers = (extra = {}) => {
+  return {
+    apikey: SUPABASE_ANON_KEY,
+    Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+    ...extra, // 필요한 헤더 정보 추가
+  }
 }
 
-// 2. 쓰기(Create): POST /posts — 새 글을 보낸다.
+// 읽기(Read): GET /posts - 글 목록 받아오는 함수
+export const getPosts = async () => {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/posts`, {
+    headers: headers(),
+  })
+  if (!res.ok) throw new Error(`글 목록을 불러오지 못했습니다.`)
+  return res.json()
+  // data = await res.json() 먼저 하고 data 리턴하는건 뭐가 다르지?
+}
+
+// 쓰기(Create): POST /posts - 새 글을 보내는 함수
 export const createPost = async (post) => {
-  const res = await fetch(BASE_URL, {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/posts`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' }, // JSON을 보낸다.
-    body: JSON.stringify(post), // JSON.stringify()를 통해 객체를 문자열 형태로 변환한다.
+    headers: headers({
+      'Content-Type': 'application/json',
+      Prefer: 'return=representation',
+    }),
+    body: JSON.stringify({
+      title: post.title,
+      body: post.body,
+      user_id: 14,
+    }),
   })
-  if (!res.ok) throw new Error('글을 저장하지 못했습니다.')
+  if (!res.ok) throw new Error(`글을 저장하지 못했습니다.`)
   return res.json()
 }
 
-// 3. 고치기(Update): PUT /posts/:id — 글을 통째로 바꾼다.
+// 고치기(Update): PUT /posts/:id - 해당 글을 통째로 바꾸는 함수
 export const updatePost = async (id, post) => {
-  const res = await fetch(`{BASE_URL}/${id}`, {
+  // fetch URL은 SUPABASE 문법
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/posts?id=eq.${id}`, {
     method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(post),
+    headers: headers({ 'Content-Type': 'application/json' }),
+    body: JSON.stringify({ title: post.title, body: post.body }),
   })
-  if (!res.ok) throw new Error('글을 수정하지 못했습니다.')
+  if (!res.ok) throw new Error(`글을 수정하지 못했습니다.`)
   return res.json()
 }
 
-// 4. 지우기(Delete): DELETE /posts/:id — 보낼 내용은 없음
+// 지우기(Delete): DELETE /posts/:id - 삭제하는 함수(보낼 내용 없음)
 export const deletePost = async (id) => {
-  const res = await fetch(`${BASE_URL}/${id}`, { method: 'DELETE' })
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/posts?id=eq.${id}`, {
+    method: 'DELETE',
+    headers: headers(),
+  })
   if (!res.ok) throw new Error('글을 삭제하지 못했습니다.')
   return true
 }
